@@ -1,0 +1,47 @@
+# Dataset Configuration
+data:
+  raw_data_path: "/Users/akankshasrivastava/Documents/Coursework/SMAI/FinalProject/data/Raw Data"
+  processed_data_path: "/Users/akankshasrivastava/Documents/Coursework/SMAI/FinalProject/data"
+  image_size: 256
+  train_split: 700
+  val_split: 130
+  test_split: 25
+  color_space: "ycbcr"  # Added: Use YCbCr color space
+  channel: "y"          # Added: Use Y channel only
+  normalize_range: [-1, 1]  # Added: Paper's normalization range
+
+# Model Configuration
+model:
+  name: "model1"  # or "model2"
+  input_channels: 1    # Changed: Using Y channel only
+  output_channels: 1   # Changed: Using Y channel only
+  initial_filters: 64
+  regularization_weight: 0.0001  # Added: Paper's regularization weight
+
+# Training Configuration
+training:
+  batch_size: 128         # Changed: Paper's batch size
+  num_epochs: 50
+  learning_rate: 0.0001   # Changed: Paper's learning rate
+  weight_decay: 0.0001    # Added: Paper's weight decay
+  device: "mps"
+  save_interval: 5
+  early_stopping_patience: 5  # Increased for stability
+  gradient_clip: 0.4         # Added: Gradient clipping
+
+# Logging Configuration
+logging:
+  tensorboard_dir: "runs"
+  checkpoint_dir: "checkpoints"
+  results_dir: "results"
+  save_dir: "results"
+
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - "psnr"
+    - "ssim"
+    - "mse"
+    - "mae"
+  save_examples: 5
+  convert_back_to_rgb: true  # Added: For final visualization
